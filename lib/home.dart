@@ -6,6 +6,7 @@ import 'package:astronacci_flutter/Controller/app_controller.dart';
 import 'package:astronacci_flutter/login.dart';
 import 'package:astronacci_flutter/profil.dart'; 
 import 'package:astronacci_flutter/user_list.dart';
+import 'package:astronacci_flutter/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,7 @@ class Home  extends StatelessWidget {
  
  
    final List<Widget> _children = <Widget>[ 
+        Welcome(), 
         UserList(header: HeaderCleant().map,),
         Profil(), 
     ];  
@@ -46,6 +48,10 @@ class Home  extends StatelessWidget {
             currentIndex: appController.currentIndex.value, 
             onTap: (v) => onTabTapped(v),
             items:  [ 
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ), 
               BottomNavigationBarItem(
                 icon: Icon(Icons.featured_play_list_sharp),
                 label: 'List User',
