@@ -1,13 +1,17 @@
 
+import 'package:astronacci_flutter/Api/api_user.dart';
+import 'package:astronacci_flutter/Models/m_list_user.dart';
 import 'package:astronacci_flutter/Models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; 
 
 class AppController extends GetxController{
 
+  final apiUser = ApiUser();
   final ipController = TextEditingController();
   final portController = TextEditingController();
-  
+  var  isLoading = false.obs;
+
   @override
   void onClose() { 
     ipController.dispose(); 
@@ -28,6 +32,6 @@ class AppController extends GetxController{
   setIpServer(String ip) => ipServer.value = ip; 
   
   var portServer = ''.obs;
-  setPortServer(String v) => portServer.value = v; 
+  setPortServer(String v) => portServer.value = v;  
   
 }
