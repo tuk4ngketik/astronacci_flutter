@@ -46,6 +46,7 @@ class Login extends StatelessWidget {
             
                     // --- 1.  Email ---
                     TextFormField(
+                      // initialValue: 'ac@mail.com',
                       controller: loginController.emailController,
                       decoration: const InputDecoration(
                         labelText: 'Email',
@@ -67,6 +68,7 @@ class Login extends StatelessWidget {
             
                     // --- 2.  Password ---
                     TextFormField(
+                      // initialValue: 'qqqqqq',
                       controller: loginController.passwordController,
                       obscureText: true,
                       decoration: const InputDecoration(
@@ -180,6 +182,7 @@ class Login extends StatelessWidget {
      appController.setDatauser(user); // simpan data user
      appController.setLogin(true); // User berhasil login
      loginController.setLoading(false); // loading false  
+     loginController.clearFormlogin(); // loading false  
      Get.toNamed('home');
   }
 

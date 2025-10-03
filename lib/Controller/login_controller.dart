@@ -31,6 +31,10 @@ class LoginController extends GetxController {
   } 
 
   setLoading(bool v) => isLoading.value = v; 
-  
+
+  clearFormlogin(){
+      emailController.clear();
+      passwordController.clear();
+  }  
 
 }
