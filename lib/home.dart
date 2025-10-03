@@ -1,6 +1,7 @@
 
 // ignore_for_file: avoid_print 
 
+import 'package:astronacci_flutter/Config/headers.dart';
 import 'package:astronacci_flutter/Controller/app_controller.dart';
 import 'package:astronacci_flutter/login.dart';
 import 'package:astronacci_flutter/profil.dart'; 
@@ -11,14 +12,12 @@ import 'package:get/get.dart';
 class Home  extends StatelessWidget {  
   Home({super.key});
 
-  final appController = Get.put(AppController()); 
+  final appController = Get.put(AppController());  
  
  
    final List<Widget> _children = <Widget>[ 
-        UserList(),
-        Profil(),
-        UserList(),
-        Profil(),
+        UserList(header: HeaderCleant().map,),
+        Profil(), 
     ];  
  
 
@@ -42,23 +41,15 @@ class Home  extends StatelessWidget {
       bottomNavigationBar: Container(
         color: Colors.indigo,
         child:  Obx(() => BottomNavigationBar(  
-            unselectedItemColor: Colors.green,
-            selectedItemColor: Colors.blue,
+            unselectedItemColor: Colors.blue,
+            selectedItemColor: Colors.indigo,
             currentIndex: appController.currentIndex.value, 
             onTap: (v) => onTabTapped(v),
             items:  [ 
               BottomNavigationBarItem(
                 icon: Icon(Icons.featured_play_list_sharp),
-                label: 'Register',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.featured_play_list_sharp),
-                label: 'Login',
-              ),   
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'List Users',
-              ),
+                label: 'List User',
+              ),  
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profil',

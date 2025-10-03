@@ -18,7 +18,7 @@ class Profil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return Scaffold(
+    return (controller.isLogin.value == false ) ? Login() : Scaffold(
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(32.0),
@@ -70,12 +70,11 @@ class Profil extends StatelessWidget {
               br(20),
           
               // --- 5. Tombol Regist 
-              TextButton.icon(
-                // onPressed: () => Get.to(()=>Login()), 
-                onPressed: () {
+              TextButton.icon( 
+                onPressed: () async {
                   controller.setLogin(false); 
-                  Get.offAll(() => Login() );
-                  // Get.off(() => Login() );
+                  // await Future.delayed(Duration(seconds: 3));
+                  Get.off(() => Login() );
                 },
                 // onPressed: () => Get.toNamed('login', preventDuplicates: false),
                 icon: Icon(Icons.logout_outlined), 
