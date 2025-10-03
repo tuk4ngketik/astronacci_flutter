@@ -34,7 +34,8 @@ class Home  extends StatelessWidget {
     : Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo,
-        title : Text('Home')
+        leading: Icon(Icons.star, color: Colors.deepOrange),
+        title : Text('Astronacci Flutter', style: TextStyle(color: Colors.white),)
       ),
       
       body: Obx(() => _children[  appController.currentIndex.value ],)   ,
