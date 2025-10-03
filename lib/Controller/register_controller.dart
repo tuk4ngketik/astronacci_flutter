@@ -63,11 +63,18 @@ class RegisterController extends GetxController {
                             // 'profile_image' : bytes,
                             'profile_image' : base64Encode(bytes), 
               };  
-
-      await Future.delayed(const Duration(seconds: 1));  
+ 
 
   }
 
     var formRegister = {}.obs;
     setLoading(bool v) => isLoading.value = v; 
+
+    clearFormRegister(){
+      nameController.clear();
+      emailController.clear();
+      passwordController.clear();
+      selectedImage.value = null;
+      formRegister.value = {};
+    }
 }

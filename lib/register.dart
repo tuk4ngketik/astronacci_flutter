@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:astronacci_flutter/Api/api_user.dart';
 import 'package:astronacci_flutter/Config/headers.dart';
 import 'package:astronacci_flutter/Controller/app_controller.dart';
@@ -31,7 +33,7 @@ class Register extends StatelessWidget {
               children: <Widget>[
                 const Text(
                   'Daftar Akun Baru',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.indigo),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigo),
                 ),
                 br(30),
 
@@ -158,8 +160,14 @@ class Register extends StatelessWidget {
     }
     if (registerFormKey.currentState!.validate() == false) { return; }
 
+    if(regController.selectedImage.value == null){
+      dialogError('Foto belum dipilih');
+      return;
+    }
+
     regController.handleRegister();
-    // print('DON:: formRegister ${regController.formRegister.value}');
+    await Future.delayed(const Duration(seconds: 3));  
+    print('DON:: formRegister ${regController.formRegister.value}');
     // regController.setLoading(false);
     // return;
 
@@ -179,7 +187,7 @@ class Register extends StatelessWidget {
         regController.setLoading(false); // loading false 
         return;
     }
-    
+     regController.clearFormRegister();
      regController.setLoading(false);
      Get.toNamed('login');
 
