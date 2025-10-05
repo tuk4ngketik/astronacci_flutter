@@ -96,4 +96,25 @@ class ApiUser{
       return null;   
   }
 
+  Future<MAll?> gantiPasswd(String url,  var data,  Map<String, String> headers) async { 
+      print('DON:: apiLogin $url');
+      try{   
+          var res = await http.post( Uri.parse( url ), headers: headers, body: data );   
+          
+          if(res.statusCode == 200){ 
+            print('DON:: res ${res.body}');
+            final  hasil = mAllFromJson(res.body);
+            return hasil;
+          }else{
+            print('DON:: NULl res.statusCode ${ res.statusCode}  res.body ${ res.body}'); 
+            throw  Exception('Error Page ${ res.statusCode} ');
+          } 
+      } 
+      catch(e){
+          print('DON:: e =>  $e');
+          Ekseption(e: e).trow(); 
+      }
+      return null;   
+  }
+
 }
