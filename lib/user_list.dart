@@ -1,39 +1,97 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_typing_uninitialized_variables, use_function_type_syntax_for_parameters, unnecessary_null_comparison
 
+import 'package:astronacci_flutter/Api/api_user.dart'; 
+import 'package:astronacci_flutter/Controller/listuser_controller.dart';
+import 'package:astronacci_flutter/Controller/pencarian_controller.dart';
+import 'package:astronacci_flutter/Helper/form_pencarian.dart';
+import 'package:astronacci_flutter/Models/m_list_user.dart';
+import 'package:astronacci_flutter/user_detail.dart'; 
 import 'package:flutter/material.dart';
-import 'package:astronacci_flutter/Config/routes.dart';
 import 'package:get/get.dart'; 
 
 class UserList extends StatelessWidget {
-  final List<String> users = ["Alice", "Bob", "Charlie", "David"];
-  final TextEditingController searchCtrl = TextEditingController();
 
-  @override
+  final header;
+  UserList({super.key, required this.header});
+
+
+  // final cariController = Get.put(PencarianController());
+  final listController = Get.put(ListuserController());   
+  final apiUser = ApiUser();
+  // List<Datauser>? data = [];
+  // int? nextPage ;
+  
+  
+  @override 
   Widget build(BuildContext context) {
-    return Scaffold( 
-      body: Column(
+      return Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: TextField(
-              controller: searchCtrl,
-              decoration: InputDecoration(
-                labelText: "Search User",
-                suffixIcon: Icon(Icons.search),
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: users.length,
-              itemBuilder: (_, i) => ListTile(
-                title: Text(users[i]),
-                onTap: () => Get.toNamed(AppRoutes.userDetail, arguments: users[i]),
-              ),
+          FormPencarian(),  
+          Expanded( child: 
+           GetBuilder<ListuserController>(  
+              initState: (state) =>  listController.getListuser(),
+              builder: (controller) { 
+            
+                if( controller.isLoading.value == true ){
+                  return Center(child: CircularProgressIndicator(),);
+                }
+             
+                // if( cariController.isLoadingPencarian.value == true ){
+                //   return Center(child: CircularProgressIndicator(),);
+                // }
+             
+                
+                final data = controller.listDatauser;
+                return (  data == null ) 
+                  ? Center(child: CircularProgressIndicator(color: Colors.red,),) 
+                  : (data!.isEmpty)  
+                    ? Center(child: Text('Tidak ada data')) 
+                    : Stack(
+                      children: [ 
+                        daftarUser( data, controller. scrollController ), 
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: 2,
+                            child: ( listController.isScrollingDown.value == true ) 
+                                      ? LinearProgressIndicator(color: Colors.orange,) 
+                                      : Center(child: Text('')),
+                        )), 
+                      ],
+                    );
+              },
             ),
           ),
         ],
-      ),
-    );
+      );
+  }  
+
+  Widget daftarUser(List<Datauser> data, ScrollController? scrollController ){
+   return  ListView.builder(
+            padding: EdgeInsets.all(10),
+            // controller: scrollController,
+            controller: (listController.statusAktif.value == 'all_user') ? scrollController : null,
+            itemCount: data!.length,
+            itemBuilder: (context, i) {
+              return Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Card( 
+                  child: ListTile( 
+                    title: Text('${data?[i].name}', style: TextStyle(fontSize: 17),),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text('${data?[i].email}', style: TextStyle(fontSize: 15),),
+                        Text('${data?[i].createdAt}', style: TextStyle(fontSize: 15),),
+                      ],
+                    ),
+                    trailing: IconButton(onPressed: ()=>Get.to(()=>UserDetail(data: data[i],)), icon: Icon(Icons.arrow_right_alt)),
+                  ) ,
+                ),
+              );              
+        });
   }
+
 }

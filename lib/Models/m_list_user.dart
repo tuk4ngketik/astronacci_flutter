@@ -56,6 +56,7 @@ class Datauser {
     int? id;
     String? name;
     String? email;
+    String? level;
     DateTime? createdAt;
     String? profileImage;
 
@@ -63,6 +64,7 @@ class Datauser {
         this.id,
         this.name,
         this.email,
+        this.level,
         this.createdAt,
         this.profileImage,
     });
@@ -71,6 +73,7 @@ class Datauser {
         id: json["id"],
         name: json["name"],
         email: json["email"],
+        level: json["level"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         profileImage: json["profile_image"],
     );
@@ -79,6 +82,7 @@ class Datauser {
         "id": id,
         "name": name,
         "email": email,
+        "level": level,
         "created_at": createdAt?.toIso8601String(),
         "profile_image": profileImage,
     };

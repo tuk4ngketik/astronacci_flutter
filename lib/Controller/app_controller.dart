@@ -1,6 +1,5 @@
 
-import 'package:astronacci_flutter/Api/api_user.dart';
-import 'package:astronacci_flutter/Models/m_list_user.dart';
+import 'package:astronacci_flutter/Api/api_user.dart'; 
 import 'package:astronacci_flutter/Models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; 
