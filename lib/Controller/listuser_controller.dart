@@ -54,12 +54,16 @@ class ListuserController extends GetxController{
   }
   
   @override
-  onInit(){ 
-    super.onInit();
+  onInit(){   
      scrollController = ScrollController();
      scrollController.addListener(  _scrollListener );
+    super.onInit();
   }
- 
+  _init() async {
+     isLoading.value = true; 
+     await Future.delayed(Duration(seconds: 2));
+  }
+
   var mListUser =  MListUser().obs; 
   RxList<Datauser> listDatauser = <Datauser>[].obs; 
    
