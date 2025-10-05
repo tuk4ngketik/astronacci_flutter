@@ -6,7 +6,8 @@ import 'package:astronacci_flutter/Controller/app_controller.dart';
 import 'package:astronacci_flutter/Helper/form_ipserver.dart';
 import 'package:astronacci_flutter/Helper/helper_widget.dart';
 import 'package:astronacci_flutter/Controller/login_controller.dart';
-import 'package:astronacci_flutter/Models/user.dart'; 
+import 'package:astronacci_flutter/Models/user.dart';
+import 'package:astronacci_flutter/home.dart'; 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -181,9 +182,13 @@ class Login extends StatelessWidget {
      final user = User(email: data.email, name: data.name, level: data.level, profileImage: data.profileImage );
      appController.setDatauser(user); // simpan data user
      appController.setLogin(true); // User berhasil login
-     loginController.setLoading(false); // loading false  
-     loginController.clearFormlogin(); // loading false  
-     Get.toNamed('home');
+     await Future.delayed(Duration(seconds: 2), () { 
+        loginController.clearFormlogin(); // loading false   
+        loginController.setLoading(false); // loading false 
+        Get.off(() => Home() ); 
+     });   
+    //  Get.offAllNamed('home'); 
+       
   }
 
 }

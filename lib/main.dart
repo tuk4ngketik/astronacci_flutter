@@ -1,4 +1,5 @@
 import 'package:astronacci_flutter/Config/routes.dart';
+import 'package:astronacci_flutter/Controller/app_controller.dart';
 import 'package:astronacci_flutter/home.dart';
 import 'package:astronacci_flutter/login.dart';
 import 'package:astronacci_flutter/register.dart';
@@ -7,11 +8,12 @@ import 'package:get/get.dart';
 
 void main() async { 
   WidgetsFlutterBinding.ensureInitialized();  
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final appController = Get.put(AppController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +31,11 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: AppRoutes.home,
-          page: () => Home(), // Halaman Home 
+          page: () => (appController.isLoading.value == true)  ? Home() : Login(), // Halaman Home 
         ),
       ],
       
-      initialRoute: AppRoutes.home, 
+      initialRoute:  AppRoutes.home,
     );
   }
 }
