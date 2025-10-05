@@ -24,7 +24,6 @@ class AppPages {
     GetPage(name: AppRoutes.register, page: () => Register()),
     GetPage(name: AppRoutes.forgotPassword, page: () => ForgotPassword()),
     GetPage(name: AppRoutes.editProfile, page: () => EditProfile()), 
-    GetPage(name: AppRoutes.userDetail, page: () => UserDetail()),
     // logout bisa diarahkan ke login lagi
     GetPage(name: AppRoutes.logout, page: () => Login()),
   ];

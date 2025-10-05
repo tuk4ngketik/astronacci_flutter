@@ -1,7 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:astronacci_flutter/Controller/app_controller.dart';
 import 'package:astronacci_flutter/Helper/helper_widget.dart';
