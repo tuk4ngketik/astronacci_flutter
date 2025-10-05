@@ -38,7 +38,7 @@ class FormIpserver  extends StatelessWidget {
                         ),
                       ),  
                       Flexible(
-                        flex: 4,
+                        flex: 3,
                         child: TextFormField( 
                                   controller: appController.portController,
                                   keyboardType : TextInputType.number,

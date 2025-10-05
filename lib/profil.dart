@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:astronacci_flutter/Controller/app_controller.dart';
 import 'package:astronacci_flutter/Helper/helper_widget.dart';
+import 'package:astronacci_flutter/ganti_password.dart';
 import 'package:astronacci_flutter/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -67,15 +68,34 @@ class Profil extends StatelessWidget {
                   leading: Icon(Icons.star_half_rounded), 
               ),
               br(20),
-          
-              // --- 5. Tombol Regist 
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton( 
+                    onPressed: () => Get.to(()=>GantiPassword() ), 
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.indigo, 
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child:  const Text(
+                            'Ganti Password',
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                  ),
+              ),
+                br(20),
+           
               TextButton.icon( 
                 onPressed: () async {
-                  controller.setLogin(false); 
-                  // await Future.delayed(Duration(seconds: 3));
-                  Get.off(() => Login() );
-                },
-                // onPressed: () => Get.toNamed('login', preventDuplicates: false),
+                  controller.setLogin(false);   
+                  Get.snackbar('Anda  usdah logout', '', backgroundColor: Colors.greenAccent );  
+                  Get.offNamedUntil(
+                    '/home', // Halaman tujuan
+                    (route) => false // Predikat: Hapus SEMUA halaman sebelumnya
+                  );
+                }, 
                 icon: Icon(Icons.logout_outlined), 
                 label: Text('Logout', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
               ),
